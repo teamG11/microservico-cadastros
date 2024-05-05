@@ -18,7 +18,6 @@ model Cliente {
     cpf        String   @unique
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
-    pedidos    Pedido[]
 
     @@map("cliente")
 }
@@ -32,36 +31,6 @@ model Produto {
     disponivel  Boolean       @default(true)
     created_at  DateTime      @default(now())
     updated_at  DateTime      @default(now()) @updatedAt
-    pedidoItens PedidoItens[]
 
     @@map("produto")
-}
-
-model Pedido {
-    id               Int           @id @default(autoincrement())
-    id_cliente       Int
-    cliente          Cliente       @relation(fields: [id_cliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    valor_final      Int?
-    tipo_pagamento   String?
-    status           String?
-    status_pagamento String?
-    created_at       DateTime      @default(now())
-    updated_at       DateTime      @default(now()) @updatedAt
-    pedidoItens      PedidoItens[]
-
-    @@map("pedido")
-}
-
-model PedidoItens {
-    id_pedido      Int
-    id_produto     Int
-    pedido         Pedido   @relation(fields: [id_pedido], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    produto        Produto  @relation(fields: [id_produto], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    quantidade     Int
-    valor_unitario Int
-    created_at     DateTime @default(now())
-    updated_at     DateTime @default(now()) @updatedAt
-
-    @@unique([id_pedido, id_produto], map: "id_pedido_id_produto_unique")
-    @@map("pedido_itens")
 }

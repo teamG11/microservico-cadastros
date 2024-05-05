@@ -41,17 +41,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "$ref": "#/parameters/nomeCliente"
-          },
-          {
-            "$ref": "#/parameters/sobrenomeCliente"
-          },
-          {
-            "$ref": "#/parameters/cpfForm"
-          }
-        ],
         "responses": {
           "201": {
             "description": "Sucesso",
@@ -141,23 +130,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "$ref": "#/parameters/nomeProduto"
-          },
-          {
-            "$ref": "#/parameters/descricaoProduto"
-          },
-          {
-            "$ref": "#/parameters/valorProduto"
-          },
-          {
-            "$ref": "#/parameters/tipoProduto"
-          },
-          {
-            "$ref": "#/parameters/disponivelProduto"
-          }
-        ],
         "responses": {
           "201": {
             "description": "Sucesso"
@@ -218,23 +190,22 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/nomeProduto"
-          },
-          {
-            "$ref": "#/parameters/descricaoProduto"
-          },
-          {
-            "$ref": "#/parameters/valorProduto"
-          },
-          {
-            "$ref": "#/parameters/tipoProduto"
-          },
-          {
-            "$ref": "#/parameters/disponivelProduto"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Produto"
+              },
+              "example": {
+                "nome": "Lanche com hambúrguer",
+                "descricao": "Lanche com hambúrguer, queijo, alface e tomate",
+                "valor": 500,
+                "categoria": "lanche",
+                "disponivel": true
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "Sucesso"
@@ -370,275 +341,7 @@
           }
         }
       }
-    },
-    "/pedido": {
-      "post": {
-        "description": "Incluir um novo pedido",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "tags": [
-          "Pedido"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/Pedido"
-              },
-              "example": {
-                "id_cliente": 12345678901
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/idCliente"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Sucesso"
-          },
-          "400": {
-            "description": "Erro de validação"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      }
-    },
-    "/pedido/{id}": {
-      "get": {
-        "description": "Buscar um pedido cadastrado",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "tags": [
-          "Pedido"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "description": "ID do pedido",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Pedido"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Erro de validação"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      },
-      "put": {
-        "description": "Alterar um pedido cadastrado",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "tags": [
-          "Pedido"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/Pedido"
-              },
-              "example": {
-                "tipo_pagamento": "pix"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/valorTotalPedido"
-          },
-          {
-            "$ref": "#/parameters/tipoPagamento"
-          },
-          {
-            "$ref": "#/parameters/statusPedido"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Sucesso"
-          },
-          "400": {
-            "description": "Erro de validação"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      }
-    },
-   "/pedido/item": {
-      "post": {
-        "description": "Adicionar item a um pedido",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "tags": [
-          "Pedido"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/Pedido"
-              },
-              "example": {
-                "id_pedido": 1,
-                "id_produto": 1,
-                "quantidade": 2
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/idPedido"
-          },
-          {
-            "$ref": "#/parameters/idProduto"
-          },
-          {
-            "$ref": "#/parameters/quantidadeItem"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Sucesso"
-          },
-          "400": {
-            "description": "Erro de validação"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      }
-    },
-    "/pedido/{id}/status-pagamento": {
-      "get": {
-        "description": "Buscar o status do pagamento de um pedido cadastrado",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "tags": [
-          "Pedido"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "description": "ID do pedido",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "description": "status-pagamento"
-              }
-            }
-          },
-          "400": {
-            "description": "Erro de validação"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      }
-   },
-   "/pedido/status/nao-finalizados": {
-      "get": {
-        "description": "buscar todos os pedidos retornando eles com a ordenação de status (Pronto, Em preparação, Recebido), ordenados os mais antigos primeiros e desconsiderando os Finalizados",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "tags": [
-          "Pedido"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Pedido"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Erro de validação"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      }
-   }
+    }
   },
   "parameters": {
     "nomeCliente": {
@@ -711,47 +414,12 @@
       "required": true,
       "type": "string"
     },
-    "idPedido": {
-      "name": "id_pedido",
-      "description": "ID do pedido",
-      "in": "body",
-      "required": true,
-      "type": "string"
-    },
     "idProduto": {
       "name": "id_produto",
       "description": "ID do produto",
       "in": "body",
       "required": true,
       "type": "string"
-    },
-    "valorTotalPedido": {
-      "name": "valor_total",
-      "description": "Valor total do pedido em centavos",
-      "in": "body",
-      "required": false,
-      "type": "number"
-    },
-    "quantidadeItem": {
-      "name": "quantidade_item",
-      "description": "Quantidade de itens pedidos",
-      "in": "body",
-      "required": true,
-      "type": "number"
-    },
-    "tipoPagamento": {
-      "name": "tipo_pagamento",
-      "description": "Tipo do pagamento (pix, cartao debito, cartao credito)",
-      "in": "body",
-      "required": false,
-      "type": "enum"
-    },
-    "statusPedido": {
-      "name": "status",
-      "description": "Status do pedido (recebido, em preparacao, pronto, finalizado)",
-      "in": "body",
-      "required": false,
-      "type": "enum"
     }
   },
   "definitions": {
@@ -797,28 +465,10 @@
           "type": "boolean"
         }
       }
-    },
-    "Pedido": {
-      "type": "object",
-      "properties": {
-        "id_cliente": {
-          "type": "string"
-        },
-        "valor_final": {
-          "type": "number"
-        },
-        "tipo_pagamento": {
-          "type": "enum"
-        },
-        "status": {
-          "type": "enum"
-        }
-      }
     }
   },
   "tags": [
     "Cliente",
-    "Pedido",
     "Produto"
   ],
   "components": {}
