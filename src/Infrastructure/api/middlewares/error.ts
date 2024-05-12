@@ -1,12 +1,14 @@
 import { ApiError } from "@/Application/errors/ApiError";
 import { env } from "@/Infrastructure/env";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
 
 export const errorMiddleware = (
   error: ZodError | ApiError | Error,
   _r: Request,
-  response: Response
+  response: Response,
+  // eslint-disable-next-line
+  _n: NextFunction,
 ) => {
   if (error instanceof ZodError) {
     return response.status(400).json({
