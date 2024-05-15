@@ -1,23 +1,16 @@
-version: '3.9'
-
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: production
-    volumes:
-      - .:/usr/src/app
+    image: leoeareis/lanchonete-cadastros:v1
     environment:
       PORT: 7000
       NODE_ENV: production
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/lanchonete?schema=public
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/lanchonete?schema=public
     ports:
       - 7000:7000
     depends_on:
-      - postgres
+      - db
 
-  postgres:
+  db:
     image: postgres:latest
     restart: always
     environment:
