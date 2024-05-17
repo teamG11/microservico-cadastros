@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-cadastros-configmap
+  labels:
+    app: app-cadastros
+  namespace: lanchonete
+data:
+  node_env: dev
+  port: '7000'
