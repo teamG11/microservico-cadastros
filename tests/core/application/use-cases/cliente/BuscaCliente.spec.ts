@@ -2,12 +2,10 @@ import { ClienteTestRepository } from "@/Infrastructure/drivers/Repositories/Tes
 import { RegistroNaoEncontradoError } from "@/Application/errors/RegistroNaoEncontradoError";
 import { BuscaClienteUseCase } from "@/Application/use-cases/clientes/BuscaClienteUseCase";
 import { beforeEach, describe, expect, it } from "vitest";
-import ClienteGateway, {
-  IClienteGateway,
-} from "@/Interfaces/Gataways/ClienteGateway";
+import ClienteGateway from "@/Interfaces/Gataways/ClienteGateway";
 
 let useCase: BuscaClienteUseCase;
-let clienteGateway: IClienteGateway;
+let clienteGateway: ClienteGateway;
 
 describe("BuscaCliente use case", () => {
   beforeEach(() => {
@@ -31,11 +29,13 @@ describe("BuscaCliente use case", () => {
 
     expect(clienteResponse.nome).toBe(cliente.nome);
     expect(clienteResponse.sobrenome).toBe(cliente.sobrenome);
+    expect(clienteResponse.cpf).toBe(cliente.cpf);
   });
 
   it("Não deve encontrar cliente cadastrado", async () => {
+    const cpfInexistente = "123";
     await expect(() =>
-      useCase.executarAsync({ cpf: "123" })
+      useCase.executarAsync({ cpf: cpfInexistente })
     ).rejects.toBeInstanceOf(RegistroNaoEncontradoError);
   });
 });
