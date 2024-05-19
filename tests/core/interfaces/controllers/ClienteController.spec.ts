@@ -1,11 +1,10 @@
 import { ClienteController } from "@/Interfaces/controllers/ClienteController";
 import { ClienteTestRepository } from "@/Infrastructure/drivers/Repositories/TestsRepositories/ClienteTestRepository";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("ClienteController", () => {
-  let mockRequest: Partial<Request>;
-  let mockResponse: Partial<Response>;
+  // eslint-disable-next-line
   let mockNext: any;
   let clienteRepository: ClienteTestRepository;
   let clienteController: ClienteController;
@@ -13,11 +12,6 @@ describe("ClienteController", () => {
   beforeEach(() => {
     clienteRepository = new ClienteTestRepository();
     clienteController = new ClienteController(clienteRepository);
-    mockRequest = {};
-    mockResponse = {
-      status: vi.fn().mockReturnThis(),
-      json: vi.fn(),
-    };
     mockNext = vi.fn();
   });
 

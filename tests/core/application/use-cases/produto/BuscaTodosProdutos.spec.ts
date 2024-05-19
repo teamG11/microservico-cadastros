@@ -6,17 +6,14 @@ import { beforeEach, describe, expect, it } from "vitest";
 import ProdutoGateway, {
   IProdutoGateway,
 } from "@/Interfaces/Gataways/ProdutoGateway";
-import { CriaProdutoUseCase } from "@/Application/use-cases/produtos/CriaProdutoUseCase";
 
 let produtoGateway: IProdutoGateway;
-let useCaseCria: CriaProdutoUseCase;
 let useCaseBuscaTodosProduto: BuscaTodosProdutosUseCase;
 
 describe("BuscaTodosProdutos use case", () => {
   beforeEach(() => {
     const produtoRepository = new ProdutoTestRepository();
     produtoGateway = new ProdutoGateway(produtoRepository);
-    useCaseCria = new CriaProdutoUseCase(produtoGateway);
     useCaseBuscaTodosProduto = new BuscaTodosProdutosUseCase(produtoGateway);
   });
 
