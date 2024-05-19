@@ -1,12 +1,12 @@
 import { ProdutoController } from "@/Interfaces/controllers/ProdutoController";
 import { ProdutoTestRepository } from "@/Infrastructure/drivers/Repositories/TestsRepositories/ProdutoTestRepository";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CategoriaProduto } from "@/Domain/Enums/CategoriaProduto";
 
 describe("ProdutoController", () => {
-  let mockRequest: Partial<Request>;
   let mockResponse: Partial<Response>;
+  // eslint-disable-next-line
   let mockNext: any;
   let produtoRepository: ProdutoTestRepository;
   let produtoController: ProdutoController;
@@ -14,7 +14,6 @@ describe("ProdutoController", () => {
   beforeEach(() => {
     produtoRepository = new ProdutoTestRepository();
     produtoController = new ProdutoController(produtoRepository);
-    mockRequest = {};
     mockResponse = {
       status: vi.fn().mockReturnThis(),
       json: vi.fn(),

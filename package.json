@@ -20,7 +20,7 @@
     "prisma:generate": "npx prisma generate",
     "start:prod": "node build/server",
     "start:migrate:prod": "prisma migrate deploy && npm run start:prod",
-    "lint:eslint": "eslint \"**/*.{ts,tsx}\"",
+    "lint:eslint": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:tsc": "tsc --noemit",
     "lint:markdown": "markdownlint *.md",
     "lint": "run-p lint:*",
