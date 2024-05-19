@@ -8,9 +8,9 @@ export class ProdutoTestRepository implements IProdutoRepository {
     const produto: Produto = {
       nome: data.nome,
       descricao: data.descricao,
-      disponivel: data.disponivel,
       categoria: data.categoria,
       valor: data.valor,
+      disponivel: data.disponivel,
     };
 
     this.produtos.push(produto);
@@ -23,9 +23,9 @@ export class ProdutoTestRepository implements IProdutoRepository {
     if (produto) {
       produto.nome = data.nome;
       produto.descricao = data.descricao;
-      produto.disponivel = data.disponivel;
       produto.categoria = data.categoria;
       produto.valor = data.valor;
+      produto.disponivel = data.disponivel;
     }
 
     return data;

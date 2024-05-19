@@ -14,7 +14,7 @@ describe("CriaCliente use case", () => {
     useCase = new CriaClienteUseCase(clienteGateway);
   });
 
-  it("Deve permitir cadastrar cliente", async () => {
+  it("Deve permitir cadastrar cliente sem sobrenome definido", async () => {
     const cliente = {
       nome: "John",
       cpf: "12345678901",
@@ -24,6 +24,20 @@ describe("CriaCliente use case", () => {
 
     expect(clienteResponse.nome).toBe(cliente.nome);
     expect(clienteResponse.sobrenome).toBe(null);
+    expect(clienteResponse.cpf).toBe(cliente.cpf);
+  });
+
+  it("Deve permitir cadastrar cliente com sobrenome definido", async () => {
+    const cliente = {
+      nome: "John",
+      sobrenome: "Doe",
+      cpf: "12345678901",
+    };
+
+    const { cliente: clienteResponse } = await useCase.executarAsync(cliente);
+
+    expect(clienteResponse.nome).toBe(cliente.nome);
+    expect(clienteResponse.sobrenome).toBe(cliente.sobrenome);
     expect(clienteResponse.cpf).toBe(cliente.cpf);
   });
 

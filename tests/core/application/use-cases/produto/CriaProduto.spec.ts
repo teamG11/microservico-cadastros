@@ -23,8 +23,8 @@ describe("CriaProduto use case", () => {
       nome: "Produto 1",
       descricao: "Descrição do produto 1",
       categoria: CategoriaProduto.lanche,
-      disponivel: true,
       valor: 1099,
+      disponivel: true,
     };
 
     const { produto: produtoResponse } = await useCase.executarAsync(produto);
@@ -32,8 +32,8 @@ describe("CriaProduto use case", () => {
     expect(produtoResponse.nome).toBe(produto.nome);
     expect(produtoResponse.descricao).toBe(produto.descricao);
     expect(produtoResponse.categoria).toBe(produto.categoria);
-    expect(produtoResponse.disponivel).toBe(produto.disponivel);
     expect(produtoResponse.valor).toBe(produto.valor);
+    expect(produtoResponse.disponivel).toBe(produto.disponivel);
   });
 
   it("Não deve permitir nome produto duplicado", async () => {
