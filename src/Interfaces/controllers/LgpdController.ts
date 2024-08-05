@@ -13,10 +13,10 @@ export class LgpdController {
 
             const createBodySchema = z.object({
                 nome: z.string().min(3).max(255),
-                descricao: z.string().min(3).max(255).optional(),
+                descricao: z.string().min(3).max(255),
                 cpf: z.string().min(11).max(11),
-                telefone: z.string().min(11).max(11).optional(),
-                endereco: z.string().min(3).max(255).optional(),
+                telefone: z.string().min(11).max(11),
+                endereco: z.string().min(3).max(255),
             });
 
             const solicitacaoLgpdToCreate = createBodySchema.parse(dados);
