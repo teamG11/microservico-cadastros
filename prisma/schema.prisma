@@ -34,3 +34,16 @@ model Produto {
 
     @@map("produto")
 }
+
+model SolicitacaoLgpd {
+    id          Int           @id @default(autoincrement())
+    nome        String
+    descricao   String
+    cpf         String
+    telefone    String
+    endereco    String
+    created_at  DateTime      @default(now())
+    updated_at  DateTime      @default(now()) @updatedAt
+
+    @@map("solicitacaoLgpd")
+}

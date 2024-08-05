@@ -341,6 +341,56 @@
           }
         }
       }
+    },
+    "/lgpd/solicitacao-exclusao":{
+     "post": {
+        "description": "Incluir solicitação exclusão dados lgpd",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "tags": [
+          "Lgpd"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/SolicitacaoLgpd"
+              },
+              "example": {
+                "nome": "João",
+                "descricao": "Gostaria de excluir os meus dados cadastrais inclusive de pagamentos da sua base.",
+                "cpf": "12345678901",
+                "telefone":"11933234523",
+                "endereco":"rua principal, 557"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/SolicitacaoLgpd"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      } 
     }
   },
   "parameters": {
@@ -465,11 +515,32 @@
           "type": "boolean"
         }
       }
+    },
+    "SolicitacaoLgpd": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "cpf": {
+          "type": "string"
+        },
+        "telefone": {
+          "type": "string"
+        },
+        "endereco": {
+          "type": "string"
+        }
+      }
     }
   },
   "tags": [
     "Cliente",
-    "Produto"
+    "Produto",
+    "Lgpd"
   ],
   "components": {}
 }
