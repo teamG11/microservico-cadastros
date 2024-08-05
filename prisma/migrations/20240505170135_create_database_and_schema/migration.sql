@@ -24,5 +24,17 @@ CREATE TABLE "produto" (
     CONSTRAINT "produto_pkey" PRIMARY KEY ("id")
 );
 
+CREATE TABLE "solicitacaoLgpd" (
+    "id" SERIAL NOT NULL,
+    "nome" TEXT NOT NULL,
+    "descricao" TEXT NOT NULL,
+    "cpf" TEXT NOT NULL,
+    "telefone" TEXT NOT NULL,
+    "endereco" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "solicitacaoLgpd_pkey" PRIMARY KEY ("id")
+);
 -- CreateIndex
 CREATE UNIQUE INDEX "cliente_cpf_key" ON "cliente"("cpf");
