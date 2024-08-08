@@ -1,25 +1,27 @@
 services:
-  app:
-    container_name: "lanchonete-cadastros"
+  app-cadastros:
+    container_name: "cadastros"
     build:
       context: .
       dockerfile: Dockerfile
       target: development-cadastros
     volumes:
       - ./:/usr/src/app
+    expose:
+      - 7001
     environment:
       PORT: 7001
       NODE_ENV: dev
-      DATABASE_URL: postgresql://postgres:postgres@db:5431/lanchonete?schema=public
+      DATABASE_URL: postgresql://postgres:postgres@db-cadastros:5431/lanchonete?schema=public
     ports:
       - 7001:7001
     command: sh -c "npx prisma migrate deploy && npm run dev"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
-      - db
+      - db-cadastros
 
-  db:
+  db-cadastros:
     image: postgres:latest
     restart: always
     environment:
